@@ -10,9 +10,10 @@ import java.util.List;
  */
 public class FluxAndMonoGeneratorService {
 
-
     public Flux<String> stringFlux(){
         return Flux.fromIterable(List.of("ahmed" , "ayla" , "shalash")).log(); // maybe come from api or db
+
+        // and log for logging all events
     }
 
     public Mono<String> stringMono(){
