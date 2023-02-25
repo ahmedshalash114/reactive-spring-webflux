@@ -16,8 +16,21 @@ public class FluxAndMonoGeneratorService {
         // and log for logging all events
     }
 
+    public Flux<String> stringFlux_usingMaps(){
+        return Flux.fromIterable(List.of("asd", "shalash" , "test"))
+                .map(String::toUpperCase)
+                .log();
+    }
+
+    public Flux<String> stringFlux_Immutable(){
+        var immutableFlux =  Flux.fromIterable(List.of("asd", "shalash" , "test"));
+            immutableFlux.map(String::toUpperCase);
+
+            return immutableFlux;
+    }
+
     public Mono<String> stringMono(){
-        return Mono.just("Shalash");
+        return Mono.just("Shalash").log();
     }
 
     public static void main(String[] args) {
