@@ -1,5 +1,6 @@
 package com.learnreactiveprogramming.service;
 
+import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -16,11 +17,28 @@ public class FluxAndMonoGeneratorService {
         // and log for logging all events
     }
 
-    public Flux<String> stringFlux_usingMaps(){
+    public Flux<String> stringFlux_usingMaps(int stringLength){
         return Flux.fromIterable(List.of("asd", "shalash" , "test"))
                 .map(String::toUpperCase)
+                .filter(x->x.length() > stringLength)
                 .log();
     }
+
+    public Flux<String> usingFlatMap(){
+        return Flux.fromIterable(List.of("ayla"))
+                .map(String::toUpperCase)
+                .flatMap(s->splitString(s))
+                .log();
+    }
+
+    private Flux<String> splitString(String name) {
+
+        var splittedChar = name.split("");
+        return Flux.fromArray(splittedChar);
+
+
+    }
+
 
     public Flux<String> stringFlux_Immutable(){
         var immutableFlux =  Flux.fromIterable(List.of("asd", "shalash" , "test"));

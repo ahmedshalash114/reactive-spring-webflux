@@ -23,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
      @Test
      void testMapOperators(){
-         var mapFlux = fluxAndMonoGeneratorService.stringFlux_usingMaps();
+         int stringLength = 4 ;
+         var mapFlux = fluxAndMonoGeneratorService.stringFlux_usingMaps(stringLength);
 
          StepVerifier.create(mapFlux)
                  .expectNext("ASD", "SHALASH" , "TEST")
@@ -40,6 +41,14 @@ import static org.junit.jupiter.api.Assertions.*;
          var mapFlux = fluxAndMonoGeneratorService.stringFlux_Immutable();
          StepVerifier.create(mapFlux)
                  .expectNext("ASD", "SHALASH" , "TEST")
+                 .verifyComplete();
+     }
+
+     @Test
+     void usingFlatMap() {
+         var usingFlatMapped = fluxAndMonoGeneratorService.usingFlatMap();
+
+         StepVerifier.create(usingFlatMapped).expectNext("A" , "Y" , "L" , "A")
                  .verifyComplete();
      }
  }
